@@ -1,33 +1,52 @@
 const data = [];
 const $input = document.querySelector('input');
 
-
-
 const url = `https://estsoft-openai-api.jejucodingcamp.workers.dev/`;
 
-let currentQuestion = 1;
+const TOTAL_PAGE = document.querySelectorAll('.field-container fieldset').length -1;
+console.log(TOTAL_PAGE);
+let CURRENT_PAGE = 1;
+const nextBtn = document.getElementById('nextBtn');
+const prevBtn = document.getElementById('prevBtn');
 
-function next(next) {
-    const currentField = document.getElementById(`question${currentQuestion}`);
-    const nextField = document.getElementById(`question${next}`);
+function next() {
+    if (CURRENT_PAGE < TOTAL_PAGE) {
+        const currentField = document.getElementById(`question${CURRENT_PAGE}`);
+        const nextField = document.getElementById(`question${CURRENT_PAGE + 1}`);
 
-    currentField.style.display = "none";
-    nextField.style.display = "block";
+        currentField.style.display = "none";
+        nextField.style.display = "block";
+        prevBtn.style.display = "block";
+        CURRENT_PAGE++;
 
-    currentQuestion++;
-    console.log(currentQuestion);
+        if(CURRENT_PAGE == TOTAL_PAGE){
+            nextBtn.style.display = "none";
+        }else{
+            nextBtn.style.display = "block";
+        }
+        console.log(CURRENT_PAGE);
+    }
 }
 
-function prev(prev) {
-    const currentField = document.getElementById(`question${currentQuestion}`);
-    const prevField = document.getElementById(`question${prev}`);
-  
-    currentField.style.display = "none";
-    prevField.style.display = "block";
-  
-    currentQuestion = prev;
-    console.log(currentQuestion);
-  }
+function prev() {
+    if (CURRENT_PAGE > 1) {
+        const currentField = document.getElementById(`question${CURRENT_PAGE}`);
+        const prevField = document.getElementById(`question${CURRENT_PAGE - 1}`);
+
+        currentField.style.display = "none";
+        prevField.style.display = "block";
+        nextBtn.style.display = "block";
+
+        CURRENT_PAGE--;
+        if(CURRENT_PAGE == 1) {
+            prevBtn.style.display = "none";
+        }else{
+            prevBtn.style.display = "block";
+        }
+
+        console.log(CURRENT_PAGE);
+    }
+}
 
 data.push({
     "role": "system",
@@ -43,7 +62,6 @@ function generateWebNovel() {
     const mc = document.getElementById('mc').value || "[주인공]";
     const sc = document.getElementById('sc').value || "[조력자]";
     const antagonist = document.getElementById('antagonist').value || "[빌런]";
-    
     const background = document.getElementById('background').value || "[배경]";
     const event1 = document.getElementById('event1').value || "[첫 사건]";
     const event2 = document.getElementById('event2').value || "[두번째 사건]";
@@ -101,7 +119,6 @@ function chatGPTAPI() {
         // 답변 온 것을 assistant로 저장
         const replying = res.choices[0].message.content;
         document.getElementById('output').innerText = replying;
-        
     })
 }
 
