@@ -104,6 +104,8 @@ function generateWebNovel() {
 function chatGPTAPI() {
 
     displayOutPut();
+    // 로딩함수 추가 요망
+
 
     fetch(url, {
         method: 'POST',
@@ -118,11 +120,78 @@ function chatGPTAPI() {
         console.log(res);
         // 답변 온 것을 assistant로 저장
         const replying = res.choices[0].message.content;
-        document.getElementById('output').innerText = replying;
+        document.getElementById('output').innerHTML = `<p class='typingTxt'>${replying}</p>`
+
+        // 지금은 문제가 많은 타이핑 함수
+        // autoTyping(".typingTxt",200);
+        
     })
 }
+
+
+// // 로딩 중 이미지
+// function LoadingWithMask(svg) {
+//     //화면의 높이와 너비를 구합니다.
+//     var maskHeight = $(document).height();
+//     var maskWidth  = window.document.body.clientWidth;
+     
+//     //화면에 출력할 마스크를 설정해줍니다.
+//     var mask       = "<div id='mask' style='position:absolute; z-index:9000; display:none; left:0; top:0;'></div>";
+//     var loadingImg = '';
+      
+//     loadingImg += " <img src='"+ svg + "' style='position: absolute; display: block; margin: 0px auto;'/>";
+ 
+//     //화면에 레이어 추가
+//     $('body')
+//         .append(mask)
+ 
+//     //마스크의 높이와 너비를 화면 것으로 만들어 전체 화면을 채웁니다.
+//     $('#mask').css({
+//             'width' : maskWidth,
+//             'height': maskHeight,
+//             'opacity' : '0.3'
+//     }); 
+  
+//     //마스크 표시
+//     $('#mask').show();
+  
+//     //로딩중 이미지 표시
+//     $('#loadingImg').append(loadingImg);
+//     $('#loadingImg').show();
+// }
+ 
+// function closeLoadingWithMask() {
+//     $('#mask, #loadingImg').hide();
+//     $('#mask, #loadingImg').empty();  
+// }
 
 function displayOutPut(){
     document.getElementById('question11').style.display = "none";
     document.getElementById('yourNovelIsHere').style.display = "block";
 }
+
+function autoTyping(elementClass, typingSpeed) {
+    let thisTxt = $(elementClass);
+    thisTxt.prepend('<div class="cursor" style="right:initial; left:0;"></div>');
+    thisTxt = thisTxt.find(".typingTxt");
+    let typingTxt = thisTxt.text().trim().split('');
+    let lenOfTxt = typingTxt.length;
+    let newTxt = "";
+
+    thisTxt.text("|");
+    setTimeout(function(){
+        thisTxt.css("opacity",1);
+        thisTxt.prev().removeAttr("style");
+        thisTxt.text("");
+
+        for(let i=0; i < lenOfTxt; i++){
+            (function(i,char){
+                setTimeout(function(){
+                    newTxt += char;
+                    thisTxt.text(newTxt);
+                }, i*typingSpeed);
+            })(i+1, text[i]);
+        }
+    }, 1500);
+}
+
