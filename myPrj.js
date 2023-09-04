@@ -1,5 +1,5 @@
 const data = [];
-const $input = document.querySelector('input');
+const $textarea = document.querySelector('textarea');
 
 const url = `https://estsoft-openai-api.jejucodingcamp.workers.dev/`;
 
@@ -57,47 +57,49 @@ function generateWebNovel() {
 
     currentQuestion = 1;
     
-    const title = document.getElementById('title').value || "[제목]";
-    const genre = document.getElementById('genre').value || "[장르]";
-    const mc = document.getElementById('mc').value || "[주인공]";
-    const sc = document.getElementById('sc').value || "[조력자]";
-    const antagonist = document.getElementById('antagonist').value || "[빌런]";
-    const background = document.getElementById('background').value || "[배경]";
-    const event1 = document.getElementById('event1').value || "[첫 사건]";
-    const event2 = document.getElementById('event2').value || "[두번째 사건]";
-    const event3 = document.getElementById('event3').value || "[세번째 사건]";
-    const ending = document.getElementById('ending').value || "[엔딩]";
-    const moral = document.getElementById('moral').value || "[덧붙여서..]";
+    const title = "[제목]" + document.getElementById('title').value || "[제목]";
+    const genre = "[장르]"+document.getElementById('genre').value || "[장르]";
+    const mc = "[주인공]"+document.getElementById('mc').value || "[주인공]";
+    const sc = "[조력자]"+document.getElementById('sc').value || "[조력자]";
+    const antagonist = "[빌런]"+document.getElementById('antagonist').value || "[빌런]";
+    const background = "[배경]"+document.getElementById('background').value || "[배경]";
+    const event1 = "[첫 사건]"+document.getElementById('event1').value || "[첫 사건]";
+    const event2 = "[두번째 사건]"+document.getElementById('event2').value || "[두번째 사건]";
+    const event3 = "[세번째 사건]"+document.getElementById('event3').value || "[세번째 사건]";
+    const ending = "[엔딩]"+document.getElementById('ending').value || "[엔딩]";
+    const moral = "[덧붙여서..]"+document.getElementById('moral').value || "[덧붙여서..]";
     
     const output = `
         ${title}
-
+        <br><br>
         ${genre}
-
+        <br><br>
         ${mc}
-
+        <br><br>
         ${sc}
-
+        <br><br>
         ${antagonist}
-
+        <br><br>
         ${background}
-
+        <br><br>
         ${event1}
-
+        <br><br>
         ${event2}
-
+        <br><br>
         ${event3}
-
+        <br><br>
         ${ending}
-
+        <br><br>
         ${moral}
+        <br><br>
     `;
 
     data.push({
         "role": "user",
         "content": output
     });
-    $input.value = '';
+    $textarea.value = '';
+    console.log(output);
     chatGPTAPI();
 }
 
@@ -120,8 +122,9 @@ function chatGPTAPI() {
         console.log(res);
         // 답변 온 것을 assistant로 저장
         const replying = res.choices[0].message.content;
-        document.getElementById('output').innerHTML = `<p class='typingTxt'>${replying}</p>`
+        document.getElementById('output').innerHTML = `<p class='typingTxt' style='white-space: pre-line;'>${replying}</p>`
 
+        console.log(replying);
         // 지금은 문제가 많은 타이핑 함수
         // autoTyping(".typingTxt",200);
         

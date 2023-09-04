@@ -87,3 +87,11 @@ button:hover {
     font-style: "TheJamsil5Bold";
 }
 
+.vertical-flip {
+  width: 10rem;
+  height: 1rem;
+  margin-block-start: 0.5rem;
+  background: dodgerblue;
+}
+
+

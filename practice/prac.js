@@ -65,3 +65,8 @@ function chatGPTAPI() {
         document.getElementById('output').innerText = replying;
     })
 }
+
+
+// 
+// 
+

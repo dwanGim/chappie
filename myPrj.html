@@ -11,9 +11,20 @@
 </head>
 
 <body>
+    <div class="header">
+      <a id="" href="">CHAPPIE</a>
+    </div>
 
     <div class="container">
         <h2>웹소설 만들기</h2>
+
+        <div id="img-div" class="img-div">
+          <div class="speech bubble">
+            <p class="question" id="question">I'm speech bubble</p>
+          </div>
+
+          <img id="bongo-cat" class="bongo-cat" src="./bongo-cat-typing.gif" alt="bongo-cat">
+        </div>
 
         <div class="main">
           <div class="overlay-left">
@@ -22,83 +33,84 @@
             
           <div class="field-container">
   
-            <fieldset id="question1">    
+            <fieldset id="question1" class="que-input">    
               <label for="title">제목:</label>
-              <input type="text" id="title" placeholder="제목을 적어주세요.">
+              <textarea type="text" id="title" class="que-input" placeholder="제목을 적어주세요."></textarea>
               <!-- <button class="onclickBtn" onclick="next('2')">다음</button> -->
             </fieldset>
             
-            <fieldset id="question2" style="display: none">
+            <fieldset id="question2" class="que-input"  style="display: none">
               <label for="genre">장르:</label>
-              <input type="text" id="genre" placeholder="장르를 적어주세요.">
+              <textarea type="text" id="genre" placeholder="장르를 적어주세요."></textarea>
               <!-- <button class="onclickBtn" onclick="next('3')">다음</button>
               <button class="onclickBtn" onclick="prev('1')">이전</button>   -->
             </fieldset>
             
-            <fieldset id="question3" style="display: none">
+            <fieldset id="question3" class="que-input"  style="display: none">
               <label for="mc">주인공:</label>
-              <input type="text" id="mc" placeholder="캐릭터를 적어주세요.">
+              <textarea type="text" id="mc" placeholder="캐릭터를 적어주세요."></textarea>
               <!-- <button class="onclickBtn" onclick="next('4')">다음</button>
               <button class="onclickBtn" onclick="prev('2')">이전</button> -->
             </fieldset>
             
-            <fieldset id="question4" style="display: none">
+            <fieldset id="question4" class="que-input"  style="display: none">
               <label for="sc">조력자:</label>
-              <input type="text" id="sc" placeholder="조력자를 적어주세요.">
+              <textarea type="text" id="sc" placeholder="조력자를 적어주세요."></textarea>
               <!-- <button class="onclickBtn" onclick="next('5')">다음</button>
               <button class="onclickBtn" onclick="prev('3')">이전</button> -->
             </fieldset>
             
-            <fieldset id="question5" style="display: none">
+            <fieldset id="question5" class="que-input"  style="display: none">
               <label for="antagonist">빌런:</label>
-              <input type="text" id="antagonist" placeholder="빌런은 어떤 인물인가요?">
+              <textarea type="text" id="antagonist" placeholder="빌런은 어떤 인물인가요?"></textarea></fieldset>
               <!-- <button class="onclickBtn" onclick="next('6')">다음</button>
               <button class="onclickBtn" onclick="prev('4')">이전</button> -->
             </fieldset>
             
-            <fieldset id="question6" style="display: none">          
+            <fieldset id="question6" class="que-input"  style="display: none">          
               <label for="background">배경:</label>
-              <input type="text" id="background" placeholder="사건이 일어나는 배경은 어떤 배경인가요?">
+              <textarea type="text" id="background" placeholder="사건이 일어나는 배경은 어떤 배경인가요?"></textarea>
               <!-- <button class="onclickBtn" onclick="next('7')">다음</button>
               <button class="onclickBtn" onclick="prev('5')">이전</button> -->
             </fieldset>
             
-            <fieldset id="question7" style="display: none">         
+            <fieldset id="question7" class="que-input"  style="display: none">         
               <label for="event1">첫 사건:</label>
-              <input type="text" id="event1" placeholder="첫번째 사건이 있나요?">
+              <textarea type="text" id="event1" placeholder="첫번째 사건이 있나요?"></textarea>
               <!-- <button class="onclickBtn" onclick="next('8')">다음</button>
               <button class="onclickBtn" onclick="prev('6')">이전</button> -->
             </fieldset>
             
             
-            <fieldset id="question8" style="display: none"> 
+            <fieldset id="question8" class="que-input"  style="display: none"> 
               <label for="event2">사건2:</label>
-              <input type="text" id="event2" placeholder="그 다음에는 어떤 일이 일어나나요?">
+              <textarea type="text" id="event2" placeholder="그 다음에는 어떤 일이 일어나나요?"></textarea>
               <!-- <button class="onclickBtn" onclick="next('9')">다음</button>
               <button class="onclickBtn" onclick="prev('7')">이전</button> -->
             </fieldset>
             
-            <fieldset id="question9" style="display: none">
+            <fieldset id="question9" class="que-input"  style="display: none">
               <label for="event3">사건3:</label>
-              <input type="text" id="event3" placeholder="그 다음에는 또 어떤 일이 일어나나요?
-              ">
+              <textarea type="text" id="event3" placeholder="그 다음에는 또 어떤 일이 일어나나요?
+              "></textarea>
               <!-- <button class="onclickBtn" onclick="next('10')">다음</button>
               <button class="onclickBtn" onclick="prev('8')">이전</button> -->
             </fieldset>
             
-            <fieldset id="question10" style="display: none">  
+            <fieldset id="question10" class="que-input"  style="display: none">  
               <label for="ending">결말:</label>
-            <input type="text" id="ending" placeholder="결말은 어떻게 되나요?">
+            <textarea type="text" id="ending" placeholder="결말은 어떻게 되나요?"></textarea>
             <!-- <button class="onclickBtn" onclick="next('11')">다음</button>
             <button class="onclickBtn" onclick="prev('9')">이전</button> -->
           </fieldset>
           
-          <fieldset id="question11" style="display: none">
+          <fieldset id="question11" class="que-input"  style="display: none">
             <label for="moral">일러두기:</label>  
-            <input type="text" id="moral" placeholder="작품을 통해 전달하고 싶은 주제나 메세지가 있나요? 또는 저에게 당부하고 싶은 말이 있다면 해주세요.">
+            <textarea type="text" id="moral" placeholder="작품을 통해 전달하고 싶은 주제나 메세지가 있나요? 또는 저에게 당부하고 싶은 말이 있다면 해주세요."></textarea>
             <button class="onclickBtn" onclick="generateWebNovel()">웹소설 만들기!</button>
             <!-- <button class="onclickBtn" onclick="prev('10')">이전</button> -->
           </fieldset>
+
           
           <fieldset id="yourNovelIsHere" style="display: none">
             <div id="output">
@@ -110,6 +122,24 @@
           <button class="next" id="nextBtn" onclick="next()">&rsaquo;</button>
         </div>
       </div>
+    </div>
+
+    <div class="footer">
+      <div class="footer-container">
+        <a class="" href="/">
+          <img src="" width="80">
+        </a>
+        <p class="">chatGPT로 웹 소설을 만들어보자</p>
+        <div class="copyright">
+          <p class="">Ormi 3rd</p>
+          <p class="">dwanGim : https://github.com/dwanGim/chappie</p>
+        </div>
+      </div>
+      <div>
+      <p class="text-white">COPYRIGHT CHAPPIE ALL RIGHT RESERVED</p>
+      </div>
+
+
     </div>
 
 
