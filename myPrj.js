@@ -3,60 +3,160 @@ const $textarea = document.querySelector('textarea');
 
 const url = `https://estsoft-openai-api.jejucodingcamp.workers.dev/`;
 
-const TOTAL_PAGE = document.querySelectorAll('.field-container fieldset').length -1;
-console.log(TOTAL_PAGE);
-let CURRENT_PAGE = 1;
+const tabBtns = document.querySelectorAll('.tabBtn');
 const nextBtn = document.getElementById('nextBtn');
 const prevBtn = document.getElementById('prevBtn');
+const TOTAL_PAGE = document.querySelectorAll('.field-container fieldset').length -1;
+let CURRENT_PAGE = 1;
+let isReplying = false;
 
-const speechBubbleStr = ["제목", "장르", "주인공", "조력자", "빌런", "배경", "첫 사건", "두번째 사건", "세번째 사건", "결말","일러두기"];
+const speechBubbleStr = ["힘세고 강한 아침! 묻겠다면, 내 이름은 채피. 우리는  쓴다. AI로 웹소설을", "어떤 장르를 쓰고 싶으세요?", "주인공에 대해 알려주세요.", "조력자는 어떤 인물인가요?", "빌런에 대해 궁금해요!", "이야기의 배경은? ", "주인공에게 무슨 일이 생기나요?", "그 다음엔 어떤 사건을 겪게 되나요?", "그 다음엔 어떻게 되는 거죠??", "이야기의 결말은 어떻게 되나요?","멋진 이야기를 만들기 위해 채피에게 이 이야기만의 멋진 점을 꼭 가르쳐주세요!"];
+const textareaIdList = ["title","genre","mc","sc","antagonist","background","event1","event2","event3","ending","moral"];
 
-goAheadCat(CURRENT_PAGE);
+
+// 초기화 함수들은 여기에!
+document.addEventListener('DOMContentLoaded', function () {
+    // 문서가 로드될 때 실행할 코드
+    console.log("채피, 발진");
+    console.log("TOTAL_PAGES"+TOTAL_PAGE);
+    console.log(tabBtns)
+
+    goAheadCat(CURRENT_PAGE); // 고양아 말해
+    
+    tabBtnOnclick();
+    tabBtns[0].classList.add('clicked');
+    // setupTextareaBehavior("tabBtn1");
+});
+
+function tabBtnOnclick() {
+    // 각 버튼에 클릭 이벤트 리스너를 추가합니다.
+    tabBtns.forEach(btn => {
+        btn.addEventListener('click', () => {
+            const btnId = btn.id;
+            const textareaIndex = parseInt(btnId.replace('tabBtn', '')) - 1; // 버튼의 ID로 textarea의 인덱스 계산
+            console.log(textareaIndex);
+            console.log(btn.id); // 버튼의 ID 가져오기
+            const textareaId = textareaIdList[textareaIndex]; // textareaIdList에서 textarea의 ID 가져오기
+            console.log(textareaId);
+            const textareaTxt = document.getElementById(textareaId); // 해당 ID에 해당하는 textarea 요소 선택
+            
+
+
+            console.log(textareaIndex);
+            console.log(textareaTxt);
+            
+
+            const currentField = document.getElementById(`question${CURRENT_PAGE}`);
+            console.log(CURRENT_PAGE);
+            CURRENT_PAGE = textareaIndex+1;
+            const nextField = document.getElementById(`question${CURRENT_PAGE}`);
+
+            currentField.style.display = "none";
+            nextField.style.display = "block";
+            nextBtn.disabled = false;
+
+            if(CURRENT_PAGE < TOTAL_PAGE) {
+                console.log("현재 페이지가 마지막 페이지가 아니야");
+                nextBtn.disabled = false;
+                if(CURRENT_PAGE == 1) {
+                    console.log("첫번째 페이지야");
+                    // prevBtn.disabled = true;
+                }
+                else{
+                    // prevBtn.disabled = false;
+                }
+            }
+            else if(CURRENT_PAGE == TOTAL_PAGE){
+                console.log("현재 페이지가 마지막 페이지야");
+                // nextBtn.disabled = true;
+            }
+
+            if(CURRENT_PAGE == 10 && isReplying){ 
+                displayOutPut();     
+            }
+            if(CURRENT_PAGE == TOTAL_PAGE){
+                nonDisplayOutPut();
+            }
+ 
+
+            // textarea에 대한 이벤트 리스너 등록
+            textareaTxt.addEventListener('input', () => {
+                // textarea의 내용이 변경되었을 때 실행할 작업
+                console.log(`Textarea with ID ${textareaId} 내용이 변경되었습니다.`);
+            }); 
+            // 클릭된 버튼에 'clicked' 클래스를 추가합니다.
+            btn.classList.add('clicked');
+            // 다른 버튼들에서 'clicked' 클래스를 제거합니다.
+            tabBtns.forEach(otherBtn => {
+            if (otherBtn !== btn) {
+                otherBtn.classList.remove('clicked');
+            }
+            });
+
+            // 클릭된 버튼에 대한 동작을 여기에 작성합니다.
+            console.log(`${btn.textContent} 버튼이 클릭되었습니다.`);
+        });
+    });
+}
+
+// function setupTextareaBehavior(textareaId) {
+//     // textarea 요소를 찾습니다.
+//     const textarea = document.getElementById(textareaId);
+//     console.log(textarea);
+//     // 버튼을 찾습니다.
+//     const button = document.getElementById("iDunnoBtn");
+  
+//     // 버튼의 기본 텍스트를 저장합니다.
+//     const originalButtonText = button.textContent;
+//     // textarea의 내용이 변경될 때 호출되는 함수를 정의합니다.
+//     function handleTextareaChange() {
+//         console.log("바뀜");
+//         // textarea의 내용을 가져옵니다.
+
+//         // 만약 textarea의 내용이 비어있다면 버튼 텍스트를 원래대로 복구합니다.
+//         if (textarea.value.length > 0) {
+//             button.textContent = '이걸로 합시다!';
+//         } else {
+//             button.textContent = originalButtonText;
+//         }
+//     }
+//     // textarea의 내용이 변경될 때마다 위의 함수를 호출하도록 리스너를 추가합니다.
+//     textarea.addEventListener('input', handleTextareaChange);
+
+//     // 페이지 로드 시 한 번 호출하여 초기 상태를 설정합니다.
+//     handleTextareaChange();
+// }
+
+
+
 
 function goAheadCat(CURRENT_PAGE) {
 
     const theCatSays = speechBubbleStr[CURRENT_PAGE-1];
-    document.getElementById('question').innerHTML = `<p class='' style='white-space: pre-line;'>${theCatSays}</p>`
+    document.getElementById('catSay').innerText = theCatSays;
 }
 
 function next() {
-    if (CURRENT_PAGE < TOTAL_PAGE) {
-        const currentField = document.getElementById(`question${CURRENT_PAGE}`);
-        const nextField = document.getElementById(`question${CURRENT_PAGE + 1}`);
-
-        currentField.style.display = "none";
-        nextField.style.display = "block";
-        prevBtn.style.display = "block";
-        CURRENT_PAGE++;
-
-        if(CURRENT_PAGE == TOTAL_PAGE){
-            nextBtn.style.display = "none";
-        }else{
-            nextBtn.style.display = "block";
-        }
-        goAheadCat(CURRENT_PAGE);
-        console.log(CURRENT_PAGE);
+    if(CURRENT_PAGE < TOTAL_PAGE){
+        NEXT_PAGE = CURRENT_PAGE++;
+        
+        tabBtns[NEXT_PAGE].classList.add('clicked');
+    
+        goAheadCat(NEXT_PAGE);
     }
 }
 
 function prev() {
     if (CURRENT_PAGE > 1) {
-        const currentField = document.getElementById(`question${CURRENT_PAGE}`);
-        const prevField = document.getElementById(`question${CURRENT_PAGE - 1}`);
+        PREV_PAGE = CURRENT_PAGE-1;
+        tabBtns[PREV_PAGE].classList.add('clicked');
 
-        currentField.style.display = "none";
-        prevField.style.display = "block";
-        nextBtn.style.display = "block";
-
-        CURRENT_PAGE--;
-        if(CURRENT_PAGE == 1) {
-            prevBtn.style.display = "none";
-        }else{
-            prevBtn.style.display = "block";
-        }
-        goAheadCat(CURRENT_PAGE);
-        console.log(CURRENT_PAGE);
+        goAheadCat(PREV_PAGE);
     }
+}
+
+function iDunno(){
+    next();
 }
 
 data.push({
@@ -112,6 +212,7 @@ function generateWebNovel() {
     $textarea.value = '';
     console.log(output);
     chatGPTAPI();
+    isReplying = true;
 }
 
 function chatGPTAPI() {
@@ -184,6 +285,11 @@ function displayOutPut(){
     document.getElementById('yourNovelIsHere').style.display = "block";
 }
 
+function nonDisplayOutPut(){
+   
+    document.getElementById('yourNovelIsHere').style.display = "none";
+}
+
 function autoTyping(elementClass, typingSpeed) {
     let thisTxt = $(elementClass);
     thisTxt.prepend('<div class="cursor" style="right:initial; left:0;"></div>');
@@ -209,3 +315,19 @@ function autoTyping(elementClass, typingSpeed) {
     }, 1500);
 }
 
+// menuTabActivate();
+
+// function menuTabActivate() {
+
+// 	// Menu Tabular
+// 	var $menu_tabs = $('.menu__tabs li a'); 
+// 	$menu_tabs.on('click', function(e) {
+// 		e.preventDefault();
+// 		$menu_tabs.removeClass('active');
+// 		$(this).addClass('active');
+
+// 		$('.menu__item').fadeOut(300);
+// 		$(this.hash).delay(300).fadeIn();
+// 	});
+
+// };
