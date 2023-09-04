@@ -9,6 +9,16 @@ let CURRENT_PAGE = 1;
 const nextBtn = document.getElementById('nextBtn');
 const prevBtn = document.getElementById('prevBtn');
 
+const speechBubbleStr = ["제목", "장르", "주인공", "조력자", "빌런", "배경", "첫 사건", "두번째 사건", "세번째 사건", "결말","일러두기"];
+
+goAheadCat(CURRENT_PAGE);
+
+function goAheadCat(CURRENT_PAGE) {
+
+    const theCatSays = speechBubbleStr[CURRENT_PAGE-1];
+    document.getElementById('question').innerHTML = `<p class='' style='white-space: pre-line;'>${theCatSays}</p>`
+}
+
 function next() {
     if (CURRENT_PAGE < TOTAL_PAGE) {
         const currentField = document.getElementById(`question${CURRENT_PAGE}`);
@@ -24,6 +34,7 @@ function next() {
         }else{
             nextBtn.style.display = "block";
         }
+        goAheadCat(CURRENT_PAGE);
         console.log(CURRENT_PAGE);
     }
 }
@@ -43,7 +54,7 @@ function prev() {
         }else{
             prevBtn.style.display = "block";
         }
-
+        goAheadCat(CURRENT_PAGE);
         console.log(CURRENT_PAGE);
     }
 }
@@ -71,27 +82,27 @@ function generateWebNovel() {
     
     const output = `
         ${title}
-        <br><br>
+        <br>
         ${genre}
-        <br><br>
+        <br>
         ${mc}
-        <br><br>
+        <br>
         ${sc}
-        <br><br>
+        <br>
         ${antagonist}
-        <br><br>
+        <br>
         ${background}
-        <br><br>
+        <br>
         ${event1}
-        <br><br>
+        <br>
         ${event2}
-        <br><br>
+        <br>
         ${event3}
-        <br><br>
+        <br>
         ${ending}
-        <br><br>
+        <br>
         ${moral}
-        <br><br>
+        <br>
     `;
 
     data.push({
