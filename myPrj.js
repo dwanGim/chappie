@@ -46,6 +46,8 @@ function moveToPage(pageNumber) {
     currentField.style.display = 'none';
     targetField.style.display = 'block';
 
+ 
+
     if(pageNumber == 1) {
         console.log("첫번째 페이지야");
         prevBtn.disabled = true;
@@ -89,8 +91,10 @@ tabBtns.forEach(btn => {
         const textareaTxt = document.getElementById(textareaId); // 해당 ID에 해당하는 textarea 요소 선택
         const idunnoBtn = document.getElementById("iDunnoBtn");
         // 버튼의 기본 텍스트를 저장합니다.
-        const idunno = idunnoBtn.textContent;
+        const idunno = "모르겠어요..";
         moveToPage(textareaIndex+1);
+        idunnoBtn.textContent = idunno;
+        idunnoBtn.style.backgroundColor = '';
 
         // textarea에 대한 이벤트 리스너 등록
         textareaTxt.addEventListener('input', () => {
@@ -116,7 +120,15 @@ tabBtns.forEach(btn => {
 
         // 클릭된 버튼에 대한 동작을 여기에 작성합니다.
         console.log(`${btn.textContent} 버튼이 클릭되었습니다.`);
+        
+        if (textareaTxt.value) {
+            idunnoBtn.textContent = (textareaTxt.value.length != 0) ? '이걸로 합시다!' : idunno;
+            idunnoBtn.style.backgroundColor = (textareaTxt.value.length != 0) ? '#abd0bc' : ''; // 배경색을 빈 문자열로 설정하여 제거
+        }
+        
     });
+
+  
 });
 
 function goAheadCat(num) {
@@ -254,6 +266,46 @@ function displayOutPut(){
 
 function nonDisplayOutPut(){
     document.getElementById('output').style.display = "none";
+    const htmlSet = "\n&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp";
+    const title = "[제목]" +htmlSet+ document.getElementById('title').value || "[제목]"+htmlSet;
+    const genre = "[장르]"+htmlSet+document.getElementById('genre').value || "[장르]";
+    const mc = "[주인공]"+htmlSet+document.getElementById('mc').value || "[주인공]"+htmlSet;
+    const sc = "[조력자]"+htmlSet+document.getElementById('sc').value || "[조력자]"+htmlSet;
+    const antagonist = "[빌런]"+htmlSet+document.getElementById('antagonist').value || "[빌런]"+htmlSet;
+    const background = "[배경]"+htmlSet+document.getElementById('background').value || "[배경]"+htmlSet;
+    const event1 = "[첫 사건]"+htmlSet+document.getElementById('event1').value || "[첫 사건]"+htmlSet;
+    const event2 = "[두번째 사건]"+htmlSet+document.getElementById('event2').value || "[두번째 사건]"+htmlSet;
+    const event3 = "[세번째 사건]"+htmlSet+document.getElementById('event3').value || "[세번째 사건]"+htmlSet;
+    const ending = "[엔딩]"+htmlSet+document.getElementById('ending').value || "[엔딩]"+htmlSet;
+    const moral = "[덧붙여서..]"+htmlSet+document.getElementById('moral').value || "[덧붙여서..]"+htmlSet;
+    
+    const output = `
+        ${title}
+
+        ${genre}
+
+        ${mc}
+
+        ${sc}
+
+        ${antagonist}
+
+        ${background}
+
+        ${event1}
+
+        ${event2}
+
+        ${event3}
+
+        ${ending}
+
+        ${moral}
+ 
+    `;
+    document.getElementById('outputArea').innerHTML = output;
+
+
 }
 
 function autoTyping(elementClass, typingSpeed) {
@@ -303,3 +355,6 @@ function sliceText(inputText, startMarker, endMarker) {
     return inputText.slice(startIndex, endIndex).trim();
   }
 
+  function headerBtnOnClick() {
+    window.location.href = "#";
+}

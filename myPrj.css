@@ -314,3 +314,16 @@ button:hover {
   height: 50px;
   width: 50px;
 }
+
+.header{
+  height: 66px;
+  background-color: #f3c2bd;
+  display: flex;
+  text-decoration-line: none;
+}
+
+.header-btn{
+  background-color: #f3c2bd;
+  border: none;
+  color: #fff;
+}
