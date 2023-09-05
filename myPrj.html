@@ -21,7 +21,8 @@
           <h2>웹소설 만들기</h2>
           <div class="upper">
             <div class="overlay-left">
-              <button class="previous" id="prevBtn" onclick="prev()">&lsaquo;</button>
+              <button class="previous" id="prevBtn" disabled onclick="moveToPage(
+                CURRENT_PAGE-1)">&lsaquo;</button>
             </div>
             <div id="img-div" class="img-div">
               <div class="speech bubble">
@@ -31,7 +32,7 @@
               <img id="bongo-cat" class="bongo-cat" src="./bongo-cat-typing.gif" alt="bongo-cat">
             </div>
             <div class="overlay-right">
-              <button class="next" id="nextBtn"  onclick="next()">&rsaquo;</button>
+              <button class="next" id="nextBtn"  onclick="moveToPage(CURRENT_PAGE+1)">&rsaquo;</button>
             </div>
         </div>
 
@@ -54,7 +55,8 @@
                 <li><button id="tabBtn8" class="tabBtn">사건2</button></li>
                 <li><button id="tabBtn9" class="tabBtn">사건3</button></li>
                 <li><button id="tabBtn10" class="tabBtn">엔딩</button></li>
-                <li><button id="tabBtn11" class="tabBtn">일러두기</button></li>
+                <li><button id="tabBtn11" class="tabBtn">주석</button></li>
+                <li><button id="tabBtn12" class="tabBtn">결과</button></li>
               </ul>
             </div>
          
@@ -139,10 +141,17 @@
             </fieldset>
 
 
-            <fieldset id="yourNovelIsHere" style="display: none">
-            <div id="output">
+            <fieldset id="question12" class="textarea-field" style="display: none" >
+              <div>
+                <textarea type="text" id="outputArea" placeholder="아직 결과가 없습니다." readonly></textarea>
+              </div>
+              <div id="output" style="display: none">
+                <div class="loading" id="loading">
+                  <label for="loading-img">Loading</label>
+                  <img class="loading-img" src="./Spinner-1s-200px.gif">
+                </div>
 
-            </div>
+              </div>
             </fieldset>
           </div>
 

@@ -113,6 +113,12 @@ body {
   margin: 1em;
 }
 
+.menu-bar {
+  display: flex;
+  justify-content: left;
+  margin: 0;
+}
+
 .menu-tabs {
   display: flex;
   justify-content: left;
@@ -172,10 +178,11 @@ textarea{
   }
 
 #output {
-  margin-top: 2em;
+  min-height: 20em;
+  margin-top: 0;
   padding: 20px;
-  background-color: #eef5fc;
-  border: 1px solid #dce6f1;
+  background-color: #ffffff;
+  border: 1px solid #e38a8a;
   border-radius: 5px;
   font-style: "TheJamsil5Bold";
   overflow-y: auto; /*높이 늘려주기*/
@@ -214,7 +221,7 @@ textarea:focus {
 {
   background-position: 100% 0; /*배경 위치 변경 가로 100 세로 0*/
   /* background-color: aquamarine; */
-  background-color: #f3c2bd; 
+  background-color: #e38a8a; 
   -o-transition: all .4s ease-in-out; /*트랜지션 정의 .4s지속시간  ease-in-out함수지정 */
   -webkit-transition: all .4s ease-in-out;
   transition: all .4s ease-in-out;
@@ -223,7 +230,7 @@ textarea:focus {
 
 
 .tabBtn {
-  width: 5em;
+  width: 4em;
   height: 2em;
   margin-left: 0;
   background-color: #f3c2bd;
@@ -241,7 +248,7 @@ textarea:focus {
   background-color: #d6bbff;
   /* 다른 스타일 속성도 필요한 경우 여기에 추가하세요. */
   -o-transition: all .4s ease-in-out; /*트랜지션 정의 .4s지속시간  ease-in-out함수지정 */
-  -webkit-transition: all .4s ease-in-out;
+  -webkit-transition: all .4s ease-in-out;/*ease-in-out자연스러운 변화 천천-보통-천천*/
   transition: all .4s ease-in-out;
 }
 
@@ -292,4 +299,18 @@ button:hover {
 
 
 
-
+.loading{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  margin-top: 5em;
+  margin-left:18em;
+}
+.loading-img{
+  justify-content: center;
+  align-items: center;
+  margin-left: 5px;
+  height: 50px;
+  width: 50px;
+}

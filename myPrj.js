@@ -6,12 +6,14 @@ const url = `https://estsoft-openai-api.jejucodingcamp.workers.dev/`;
 const tabBtns = document.querySelectorAll('.tabBtn');
 const nextBtn = document.getElementById('nextBtn');
 const prevBtn = document.getElementById('prevBtn');
-const TOTAL_PAGE = document.querySelectorAll('.field-container fieldset').length -1;
+const TOTAL_PAGE = document.querySelectorAll('.field-container fieldset').length;
 let CURRENT_PAGE = 1;
 let isReplying = false;
 
-const speechBubbleStr = ["힘세고 강한 아침! 묻겠다면, 내 이름은 채피. 우리는  쓴다. AI로 웹소설을", "어떤 장르를 쓰고 싶으세요?", "주인공에 대해 알려주세요.", "조력자는 어떤 인물인가요?", "빌런에 대해 궁금해요!", "이야기의 배경은? ", "주인공에게 무슨 일이 생기나요?", "그 다음엔 어떤 사건을 겪게 되나요?", "그 다음엔 어떻게 되는 거죠??", "이야기의 결말은 어떻게 되나요?","멋진 이야기를 만들기 위해 채피에게 이 이야기만의 멋진 점을 꼭 가르쳐주세요!"];
-const textareaIdList = ["title","genre","mc","sc","antagonist","background","event1","event2","event3","ending","moral"];
+const speechBubbleStr = ["힘세고 강한 아침! 묻겠다면, 내 이름은 채피. 우리는  쓴다. AI로 웹소설을", "어떤 장르를 쓰고 싶으세요?", "주인공에 대해 알려주세요.", "조력자는 어떤 인물인가요?", "빌런에 대해 궁금해요!", "이야기의 배경은? ", "주인공에게 무슨 일이 생기나요?", "그 다음엔 어떤 사건을 겪게 되나요?", "그 다음엔 어떻게 되는 거죠??", "이야기의 결말은 어떻게 되나요?","멋진 이야기를 만들기 위해 채피에게 이 이야기만의 멋진 점을 꼭 가르쳐주세요!", "아직 결과가 없습니다!"];
+const replyingSpeechBubble = ["제목입니다!","장르입니다!","주인공입니다!","조력자입니다!","빌런입니다!","이야기의 배경입니다!","첫번째 사건입니다!","두번째 사건입니다!","세번째 사건입니다!","엔딩입니다!","이 작품의 주제와 설명입니다.","웹소설이 완성되었습니다!"];
+const textareaIdList = ["title","genre","mc","sc","antagonist","background","event1","event2","event3","ending","moral","output"];
+const outputStrList = ["[제목]","[장르]","[주인공]","[조력자]","[빌런]","[배경]","[첫 사건]","[두번째 사건]","[세번째 사건]","[엔딩]","[덧붙여서..]"];
 
 
 // 초기화 함수들은 여기에!
@@ -23,151 +25,139 @@ document.addEventListener('DOMContentLoaded', function () {
 
     goAheadCat(CURRENT_PAGE); // 고양아 말해
     
-    tabBtnOnclick();
+    moveToPage(1);
     tabBtns[0].classList.add('clicked');
     // setupTextareaBehavior("tabBtn1");
+    data.push({
+        "role": "system",
+        "content": "assistant는 한국어로 웹소설을 만들어주는 최고의 AI입니다. 최고의 AI답게 제목이랑 등장인물 이름을 멋있게 지어주지요. 스토리도 물론 흥미진진합니다!"
+    });
 });
 
-function tabBtnOnclick() {
-    // 각 버튼에 클릭 이벤트 리스너를 추가합니다.
-    tabBtns.forEach(btn => {
-        btn.addEventListener('click', () => {
-            const btnId = btn.id;
-            const textareaIndex = parseInt(btnId.replace('tabBtn', '')) - 1; // 버튼의 ID로 textarea의 인덱스 계산
-            console.log(textareaIndex);
-            console.log(btn.id); // 버튼의 ID 가져오기
-            const textareaId = textareaIdList[textareaIndex]; // textareaIdList에서 textarea의 ID 가져오기
-            console.log(textareaId);
-            const textareaTxt = document.getElementById(textareaId); // 해당 ID에 해당하는 textarea 요소 선택
-            
+function moveToPage(pageNumber) {
+    console.log("pageNumber"+pageNumber);
+    console.log("CURRENT_PAGE"+CURRENT_PAGE);
+    const currentField = document.getElementById(`question${CURRENT_PAGE}`);
+    const targetField = document.getElementById(`question${pageNumber}`);
+    const nextBtn = document.getElementById('nextBtn');
+    const prevBtn = document.getElementById('prevBtn');
+    const idunnoBtn = document.getElementById('iDunnoBtn');
 
+    currentField.style.display = 'none';
+    targetField.style.display = 'block';
 
-            console.log(textareaIndex);
-            console.log(textareaTxt);
-            
+    if(pageNumber == 1) {
+        console.log("첫번째 페이지야");
+        prevBtn.disabled = true;
+    }
+    else{
+        prevBtn.disabled = false;
+    }
 
-            const currentField = document.getElementById(`question${CURRENT_PAGE}`);
-            console.log(CURRENT_PAGE);
-            CURRENT_PAGE = textareaIndex+1;
-            const nextField = document.getElementById(`question${CURRENT_PAGE}`);
+    if(CURRENT_PAGE < TOTAL_PAGE) {
+        console.log("현재 페이지가 마지막 페이지가 아니야");
+        nextBtn.disabled = false;
+        idunnoBtn.disabled = false;
+        
+    }
+    if(pageNumber == TOTAL_PAGE || pageNumber > TOTAL_PAGE){
+        console.log("현재 페이지가 마지막 페이지야");
+        nextBtn.disabled = true;
+        idunnoBtn.disabled = true;
+        if(isReplying){
+            idunnoBtn.disabled = false;
+            displayOutPut();
+            // goAheadCat(speechBubbleStr.length);
+        }else{
+            nonDisplayOutPut();
+        }
+    }
 
-            currentField.style.display = "none";
-            nextField.style.display = "block";
-            nextBtn.disabled = false;
+    CURRENT_PAGE = pageNumber;
+    goAheadCat(CURRENT_PAGE);
 
-            if(CURRENT_PAGE < TOTAL_PAGE) {
-                console.log("현재 페이지가 마지막 페이지가 아니야");
-                nextBtn.disabled = false;
-                if(CURRENT_PAGE == 1) {
-                    console.log("첫번째 페이지야");
-                    // prevBtn.disabled = true;
-                }
-                else{
-                    // prevBtn.disabled = false;
-                }
+    const tabIdToClick = `tabBtn${CURRENT_PAGE}`;
+    document.getElementById(tabIdToClick).click();
+
+}
+
+tabBtns.forEach(btn => {
+    btn.addEventListener('click', () => {
+        const btnId = btn.id;
+        const textareaIndex = parseInt(btnId.replace('tabBtn', '')) - 1; // 버튼의 ID로 textarea의 인덱스 계산
+        const textareaId = textareaIdList[textareaIndex]; // textareaIdList에서 textarea의 ID 가져오기
+        const textareaTxt = document.getElementById(textareaId); // 해당 ID에 해당하는 textarea 요소 선택
+        const idunnoBtn = document.getElementById("iDunnoBtn");
+        // 버튼의 기본 텍스트를 저장합니다.
+        const idunno = idunnoBtn.textContent;
+        moveToPage(textareaIndex+1);
+
+        // textarea에 대한 이벤트 리스너 등록
+        textareaTxt.addEventListener('input', () => {
+            // textarea의 내용이 변경되었을 때 실행할 작업
+            console.log(`Textarea with ID ${textareaId} 내용이 변경되었습니다.`);
+            if (textareaTxt.value.length > 0) {
+                idunnoBtn.textContent = '이걸로 합시다!';
+                idunnoBtn.style.backgroundColor = '#abd0bc';
+                
+            } else {
+                idunnoBtn.textContent = idunno;
+                idunnoBtn.style.backgroundColor = '';
             }
-            else if(CURRENT_PAGE == TOTAL_PAGE){
-                console.log("현재 페이지가 마지막 페이지야");
-                // nextBtn.disabled = true;
-            }
-
-            if(CURRENT_PAGE == 10 && isReplying){ 
-                displayOutPut();     
-            }
-            if(CURRENT_PAGE == TOTAL_PAGE){
-                nonDisplayOutPut();
-            }
- 
-
-            // textarea에 대한 이벤트 리스너 등록
-            textareaTxt.addEventListener('input', () => {
-                // textarea의 내용이 변경되었을 때 실행할 작업
-                console.log(`Textarea with ID ${textareaId} 내용이 변경되었습니다.`);
-            }); 
-            // 클릭된 버튼에 'clicked' 클래스를 추가합니다.
-            btn.classList.add('clicked');
-            // 다른 버튼들에서 'clicked' 클래스를 제거합니다.
-            tabBtns.forEach(otherBtn => {
+        }); 
+        // 클릭된 버튼에 'clicked' 클래스를 추가합니다.
+        btn.classList.add('clicked');
+        // 다른 버튼들에서 'clicked' 클래스를 제거합니다.
+        tabBtns.forEach(otherBtn => {
             if (otherBtn !== btn) {
                 otherBtn.classList.remove('clicked');
             }
-            });
-
-            // 클릭된 버튼에 대한 동작을 여기에 작성합니다.
-            console.log(`${btn.textContent} 버튼이 클릭되었습니다.`);
         });
+
+        // 클릭된 버튼에 대한 동작을 여기에 작성합니다.
+        console.log(`${btn.textContent} 버튼이 클릭되었습니다.`);
     });
-}
+});
 
-// function setupTextareaBehavior(textareaId) {
-//     // textarea 요소를 찾습니다.
-//     const textarea = document.getElementById(textareaId);
-//     console.log(textarea);
-//     // 버튼을 찾습니다.
-//     const button = document.getElementById("iDunnoBtn");
-  
-//     // 버튼의 기본 텍스트를 저장합니다.
-//     const originalButtonText = button.textContent;
-//     // textarea의 내용이 변경될 때 호출되는 함수를 정의합니다.
-//     function handleTextareaChange() {
-//         console.log("바뀜");
-//         // textarea의 내용을 가져옵니다.
-
-//         // 만약 textarea의 내용이 비어있다면 버튼 텍스트를 원래대로 복구합니다.
-//         if (textarea.value.length > 0) {
-//             button.textContent = '이걸로 합시다!';
-//         } else {
-//             button.textContent = originalButtonText;
-//         }
-//     }
-//     // textarea의 내용이 변경될 때마다 위의 함수를 호출하도록 리스너를 추가합니다.
-//     textarea.addEventListener('input', handleTextareaChange);
-
-//     // 페이지 로드 시 한 번 호출하여 초기 상태를 설정합니다.
-//     handleTextareaChange();
-// }
-
-
-
-
-function goAheadCat(CURRENT_PAGE) {
-
-    const theCatSays = speechBubbleStr[CURRENT_PAGE-1];
+function goAheadCat(num) {
+    let theCatSays;
+    if(!isReplying){
+        const catSaysIndex = num-1;
+        theCatSays = speechBubbleStr[catSaysIndex];
+    }else{
+        const catSaysIndex = num-1;
+        theCatSays = replyingSpeechBubble[catSaysIndex];
+    }
     document.getElementById('catSay').innerText = theCatSays;
 }
 
-function next() {
-    if(CURRENT_PAGE < TOTAL_PAGE){
-        NEXT_PAGE = CURRENT_PAGE++;
-        
-        tabBtns[NEXT_PAGE].classList.add('clicked');
-    
-        goAheadCat(NEXT_PAGE);
-    }
-}
 
-function prev() {
-    if (CURRENT_PAGE > 1) {
-        PREV_PAGE = CURRENT_PAGE-1;
-        tabBtns[PREV_PAGE].classList.add('clicked');
-
-        goAheadCat(PREV_PAGE);
-    }
-}
 
 function iDunno(){
-    next();
+    console.log(isReplying);
+
+    if(isReplying){
+        const output = document.getElementById('output').innerText;
+        navigator.clipboard.writeText(output)
+        .then(() => {
+            alert('텍스트가 복사되었습니다.');
+        })
+        .catch(err => {
+            console.error('텍스트 복사 실패: ', err);
+        });
+    }else{
+        const NEXT_PAGE = CURRENT_PAGE+1;
+        moveToPage(NEXT_PAGE);
+    }
 }
 
-data.push({
-    "role": "system",
-    "content": "assistant는 한국어로 웹소설을 만들어주는 최고의 AI입니다. 최고의 AI답게 제목이랑 등장인물 이름을 멋있게 지어주지요. 스토리도 물론 흥미진진합니다!"
-});
+
 // script.js
 function generateWebNovel() {
 
-    currentQuestion = 1;
-    
+    moveToPage(TOTAL_PAGE);
+    // goAheadCat(speechBubbleStr.length-1);
+ 
     const title = "[제목]" + document.getElementById('title').value || "[제목]";
     const genre = "[장르]"+document.getElementById('genre').value || "[장르]";
     const mc = "[주인공]"+document.getElementById('mc').value || "[주인공]";
@@ -212,14 +202,19 @@ function generateWebNovel() {
     $textarea.value = '';
     console.log(output);
     chatGPTAPI();
-    isReplying = true;
+    document.getElementById('iDunnoBtn').disabled = false;
 }
 
 function chatGPTAPI() {
+    const loading = document.getElementById('loading');
+    const outputArea = document.getElementById('outputArea');
+    const outputDiv = document.getElementById('output');
 
-    displayOutPut();
-    // 로딩함수 추가 요망
+    outputDiv.style.display = "block";
+    loading.style.display = "block";
+    outputArea.style.display = "none";
 
+    document.getElementById('catSay').innerText = "로딩 중..."
 
     fetch(url, {
         method: 'POST',
@@ -234,60 +229,31 @@ function chatGPTAPI() {
         console.log(res);
         // 답변 온 것을 assistant로 저장
         const replying = res.choices[0].message.content;
-        document.getElementById('output').innerHTML = `<p class='typingTxt' style='white-space: pre-line;'>${replying}</p>`
-
+        outputDiv.innerHTML = `<p class='typingTxt' style='white-space: pre-line;'>${replying}</p>`
+        loading.style.display = "none";
         console.log(replying);
         // 지금은 문제가 많은 타이핑 함수
         // autoTyping(".typingTxt",200);
-        
+        displayOutPut();
+        outputToTextarea(replying);
+        isReplying = true;
+        goAheadCat(CURRENT_PAGE);
     })
 }
 
-
-// // 로딩 중 이미지
-// function LoadingWithMask(svg) {
-//     //화면의 높이와 너비를 구합니다.
-//     var maskHeight = $(document).height();
-//     var maskWidth  = window.document.body.clientWidth;
-     
-//     //화면에 출력할 마스크를 설정해줍니다.
-//     var mask       = "<div id='mask' style='position:absolute; z-index:9000; display:none; left:0; top:0;'></div>";
-//     var loadingImg = '';
-      
-//     loadingImg += " <img src='"+ svg + "' style='position: absolute; display: block; margin: 0px auto;'/>";
- 
-//     //화면에 레이어 추가
-//     $('body')
-//         .append(mask)
- 
-//     //마스크의 높이와 너비를 화면 것으로 만들어 전체 화면을 채웁니다.
-//     $('#mask').css({
-//             'width' : maskWidth,
-//             'height': maskHeight,
-//             'opacity' : '0.3'
-//     }); 
-  
-//     //마스크 표시
-//     $('#mask').show();
-  
-//     //로딩중 이미지 표시
-//     $('#loadingImg').append(loadingImg);
-//     $('#loadingImg').show();
-// }
- 
-// function closeLoadingWithMask() {
-//     $('#mask, #loadingImg').hide();
-//     $('#mask, #loadingImg').empty();  
-// }
-
 function displayOutPut(){
     document.getElementById('question11').style.display = "none";
-    document.getElementById('yourNovelIsHere').style.display = "block";
+    document.getElementById('question12').style.display = "block";
+    const output = document.getElementById('output');
+    const iDunnoBtn = document.getElementById('iDunnoBtn');
+    output.style.display = "block";
+    iDunnoBtn.textContent = "복사하기";
+    iDunnoBtn.style.backgroundColor = '#93dbe9';
+    
 }
 
 function nonDisplayOutPut(){
-   
-    document.getElementById('yourNovelIsHere').style.display = "none";
+    document.getElementById('output').style.display = "none";
 }
 
 function autoTyping(elementClass, typingSpeed) {
@@ -315,19 +281,25 @@ function autoTyping(elementClass, typingSpeed) {
     }, 1500);
 }
 
-// menuTabActivate();
 
-// function menuTabActivate() {
+function outputToTextarea(output) {
+    
+    for (let index = 0; index < textareaIdList.length; index++) {
+        const textareaId = textareaIdList[index];
+        if (textareaId == "output") {
+            break; // 원하는 조건을 만족하면 루프를 중단합니다.
+        }
+        const startMarker = outputStrList[index];
+        const endMarker = outputStrList[index + 1];
+        const slicedText = sliceText(output, startMarker, endMarker);
+        document.getElementById(textareaId).value = slicedText;
 
-// 	// Menu Tabular
-// 	var $menu_tabs = $('.menu__tabs li a'); 
-// 	$menu_tabs.on('click', function(e) {
-// 		e.preventDefault();
-// 		$menu_tabs.removeClass('active');
-// 		$(this).addClass('active');
+    }
+}
 
-// 		$('.menu__item').fadeOut(300);
-// 		$(this.hash).delay(300).fadeIn();
-// 	});
+function sliceText(inputText, startMarker, endMarker) {
+    const startIndex = inputText.indexOf(startMarker);
+    const endIndex = inputText.indexOf(endMarker);
+    return inputText.slice(startIndex, endIndex).trim();
+  }
 
-// };
