@@ -258,6 +258,26 @@ function generateWebNovel() {
 ```
 <br>
 
+```css
+/* 말풍선 꼬리표 부분입니다. */
+.bubble:before {
+  content: "";
+  width: 0px;
+  height: 0px;
+  position: absolute; /*부모요소 기준*/
+  border-left: 10px solid #d6bbff;
+  border-right: 10px solid transparent;
+  border-top: 10px solid #d6bbff;
+  border-bottom: 10px solid transparent;
+  right: -21px;/*위치지정*/
+  top: 100px;
+}
+
+```
+<br>
+또한 css로 말풍선을 그려보았습니다.
+
+<br>
 
 그 밖에도 목업페이지 prac.html을 통한 테스트와 디버깅으로 편의 기능을 개발하여, 사용자가 웹페이지 경험에 대해 불편함이 없고자 노력하였습니다.
 
@@ -285,6 +305,9 @@ https://paullabworkspace.notion.site/ChatGPT-eb9761e8baae41ce9f7c405df8e19786
 
 2. special thx to bongo.cat
 https://bongo.cat/
+
+3. LOLcolor
+https://www.webdesignrankings.com/resources/lolcolors/
 
 <br>
 

@@ -183,7 +183,7 @@ textarea{
   margin-top: 0;
   padding: 20px;
   background-color: #ffffff;
-  border: 1px solid #e38a8a;
+  border: 8px solid #e38a8a;
   border-radius: 5px;
   font-style: "TheJamsil5Bold";
   overflow-y: auto; /*높이 늘려주기*/
@@ -346,4 +346,8 @@ button:hover {
 #outputArea::-webkit-scrollbar-thumb,
 .textarea::-webkit-scrollbar-thumb {
   background-color: transparent;
+}
+
+#history-btn {
+  margin-left: 20em;
 }

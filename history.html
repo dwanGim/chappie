@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="ko-KR">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>history</title>
+  <style>
+  </style>
+    <link rel="stylesheet" href="./index.css">
+    <link rel='stylesheet' href='https://fonts.googleapis.com/css?family=Ropa+Sans'>
+</head>
+
+<body>
+    <table>
+        <thead>
+            <tr>
+                <th>번호</th>
+                <th>제목</th>
+                <th>장르</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td></td>
+                <td></td>
+                <td></td>
+            </tr>
+        </tbody>
+    </table>
+</body>
+
+<script>
+    const outputStrList = ["[제목]", "[장르]", "[주인공]", "[조력자]", "[빌런]", "[배경]", "[첫 사건]", "[두번째 사건]", "[세번째 사건]", "[엔딩]", "[덧붙여서..]"];
+
+    const storedData = localStorage.getItem("novelData");
+    const dataArray = JSON.parse(storedData); // 전체 데이터 배열
+
+    const tableBody = document.querySelector("table tbody");
+
+    // 각 데이터에 대해 처리
+    dataArray.forEach((data, index) => {
+        const text = data.novelData;
+        const result = {};
+
+        for (let i = 0; i < outputStrList.length - 1; i++) {
+            const startMarker = outputStrList[i];
+            const endMarker = outputStrList[i + 1];
+            const startIndex = text.indexOf(startMarker);
+            const endIndex = text.indexOf(endMarker);
+
+            if (startIndex !== -1 && endIndex !== -1) {
+                const key = startMarker.replace('[', '').replace(']', '');
+                const value = text.slice(startIndex + startMarker.length, endIndex).trim();
+                result[key] = value;
+            }
+        }
+
+        // result 객체에는 필요한 정보가 저장되어 있음
+        // 테이블에 추가
+        const row = tableBody.insertRow();
+        const numberCell = row.insertCell(0);
+        const titleCell = row.insertCell(1);
+        const genreCell = row.insertCell(2); 
+
+        numberCell.textContent = index + 1;
+        titleCell.textContent = result.제목;
+        genreCell.textContent = result.장르;
+
+        // 제목 셀에 클릭 이벤트 리스너 추가
+        titleCell.addEventListener('click', () => {
+            // 클릭한 행의 인덱스를 detail.html로 전달하고 이동
+            window.location.href = `detail.html?index=${index}`;
+        });
+    });
+
+</script>
+
+</html>
