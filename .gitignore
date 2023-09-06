@@ -1,5 +1,6 @@
 ## 파일 무시
 /note.txt
+/apiKeys.js
 
 ## 다음과 같은 확장자는 전체 무시
 *.text
@@ -8,3 +9,4 @@
 
 ## 폴더 무시
 test/
+prac/

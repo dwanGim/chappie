@@ -201,27 +201,16 @@ function generateWebNovel() {
     
     let output = `
         ${title}
-        <br>
         ${genre}
-        <br>
         ${mc}
-        <br>
         ${sc}
-        <br>
         ${antagonist}
-        <br>
         ${background}
-        <br>
         ${event1}
-        <br>
         ${event2}
-        <br>
         ${event3}
-        <br>
         ${ending}
-        <br>
         ${moral}
-        <br>
     `;
 
 
@@ -368,34 +357,9 @@ function nonDisplayOutPut(){
         ${moral}
  
     `;
+    output.replace("<br>","");
     document.getElementById('outputArea').innerHTML = output;
 }
-
-// function autoTyping(elementClass, typingSpeed) {
-//     let thisTxt = $(elementClass);
-//     thisTxt.prepend('<div class="cursor" style="right:initial; left:0;"></div>');
-//     thisTxt = thisTxt.find(".typingTxt");
-//     let typingTxt = thisTxt.text().trim().split('');
-//     let lenOfTxt = typingTxt.length;
-//     let newTxt = "";
-
-//     thisTxt.text("|");
-//     setTimeout(function(){
-//         thisTxt.css("opacity",1);
-//         thisTxt.prev().removeAttr("style");
-//         thisTxt.text("");
-
-//         for(let i=0; i < lenOfTxt; i++){
-//             (function(i,char){
-//                 setTimeout(function(){
-//                     newTxt += char;
-//                     thisTxt.text(newTxt);
-//                 }, i*typingSpeed);
-//             })(i+1, text[i]);
-//         }
-//     }, 1500);
-// }
-
 
 function outputToTextarea(output) {
     
@@ -415,7 +379,7 @@ function sliceText(inputText, startMarker, endMarker) {
 }
 
 function headerBtnOnClick() {
-    window.location.href = "https://dwangim.github.io/chappie/myPrj.html";
+    location.reload();
 }
 
 function resetNovel(){
