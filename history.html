@@ -80,7 +80,6 @@
             }
         }
 
-        // result 객체에는 필요한 정보가 저장되어 있음
         // 테이블에 추가
         const row = tableBody.insertRow();
         const numberCell = row.insertCell(0);
@@ -91,9 +90,8 @@
         titleCell.textContent = result.제목;
         genreCell.textContent = result.장르;
 
-        // 제목 셀에 클릭 이벤트 리스너 추가
         titleCell.addEventListener('click', () => {
-            // 클릭한 행의 인덱스를 detail.html로 전달하고 이동
+            // 클릭한 행의 인덱스를 detail.html로 이동
             window.location.href = `detail.html?index=${index}`;
         });
     });
