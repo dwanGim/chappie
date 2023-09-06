@@ -1,4 +1,4 @@
-# chappie
+# chappie 
 ##### chatGPT API를 이용해 웹소설 플롯을 작성할 수 있습니다.
 ##### 사용자는 형식에 따라 질문에 답하여 새로운 이야기를 만들어낼 수 있습니다.
 ___
@@ -30,8 +30,10 @@ https://dwangim.github.io/chappie/ 로 채피에 접속하세요.
 
 혹시 아무런 아이디어가 없으셔도 괜찮습니다. 모든 질문을 스킵하고 채피에게 모든 걸 맡겨보세요.
 
-- 초기화면
+<img src='./img/buttons.gif'>
 
+
+https://bongo.cat/
 
 
 
