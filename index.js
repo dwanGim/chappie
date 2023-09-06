@@ -9,7 +9,7 @@ const prevBtn = document.getElementById('prevBtn');
 const TOTAL_PAGE = document.querySelectorAll('.field-container fieldset').length;
 
 
-const speechBubbleStr = ["힘세고 강한 아침! 묻겠다면, 내 이름은 채피. 우리는  쓴다. AI로 웹소설을", "어떤 장르를 쓰고 싶으세요?", "주인공에 대해 알려주세요.", "조력자는 어떤 인물인가요?", "빌런에 대해 궁금해요!", "이야기의 배경은? ", "주인공에게 무슨 일이 생기나요?", "그 다음엔 어떤 사건을 겪게 되나요?", "그 다음엔 어떻게 되는 거죠??", "이야기의 결말은 어떻게 되나요?","멋진 이야기를 만들기 위해 채피에게 이 이야기만의 멋진 점을 꼭 가르쳐주세요!", "아직 결과가 없습니다!"];
+const speechBubbleStr = ["안녕하세요! AI웹소설 작가 채피라고해요. 질문에 따라서 재밌는 플롯을 만들어드릴게요.", "어떤 장르를 쓰고 싶으세요?", "주인공에 대해 알려주세요.", "조력자는 어떤 인물인가요?", "빌런에 대해 궁금해요!", "이야기의 배경은? ", "주인공에게 무슨 일이 생기나요?", "그 다음엔 어떤 사건을 겪게 되나요?", "그 다음엔 어떻게 되는 거죠??", "이야기의 결말은 어떻게 되나요?","멋진 이야기를 만들기 위해 채피에게 이 이야기만의 멋진 점을 꼭 가르쳐주세요!", "아직 결과가 없습니다!"];
 const replyingSpeechBubble = ["제목입니다!","장르입니다!","주인공입니다!","조력자입니다!","빌런입니다!","이야기의 배경입니다!","첫번째 사건입니다!","두번째 사건입니다!","세번째 사건입니다!","엔딩입니다!","이 작품의 주제와 설명입니다.","웹소설이 완성되었습니다!"];
 const textareaIdList = ["title","genre","mc","sc","antagonist","background","event1","event2","event3","ending","moral","output"];
 const outputStrList = ["[제목]","[장르]","[주인공]","[조력자]","[빌런]","[배경]","[첫 사건]","[두번째 사건]","[세번째 사건]","[엔딩]","[덧붙여서..]"];
@@ -41,6 +41,9 @@ function moveToPage(pageNumber) {
     console.log("CURRENT_PAGE"+CURRENT_PAGE);
     const currentField = document.getElementById(`question${CURRENT_PAGE}`);
     const targetField = document.getElementById(`question${pageNumber}`);
+    const textareaId = textareaIdList[pageNumber];
+    // const textareaTxt = document.getElementById(textareaId);
+    // const idunnoBtn = document.getElementById('iDunnoBtn');
 
     currentField.style.display = 'none';
     targetField.style.display = 'block';
@@ -84,6 +87,8 @@ function pageBtnHandler(pageNumber) {
             nonDisplayOutPut();
         }
     }
+
+    
 }
 
 tabBtns.forEach(btn => {
@@ -287,8 +292,6 @@ function chatGPTAPI() {
     })
 }
 
-
-
 function loadingBtnHandler(isComplete){
     if(!isComplete){
         document.getElementById('catSay').innerText = "로딩 중...";
@@ -313,7 +316,6 @@ function loadingBtnHandler(isComplete){
     }
     
 }
-
 
 function displayOutPut(){
     const output = document.getElementById('output');
