@@ -13,22 +13,45 @@
 </head>
 
 <body>
-    <table>
-        <thead>
-            <tr>
-                <th>번호</th>
-                <th>제목</th>
-                <th>장르</th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr>
-                <td></td>
-                <td></td>
-                <td></td>
-            </tr>
-        </tbody>
-    </table>
+    <div class="header" vlink="white">
+        <button class="header-btn" id="header-btn" onclick="headerBtnOnClick()">CHAPPIE</button>
+        <button class="header-btn" id="history-btn" onclick="goHistory()">HISTORY</button>
+    </div>
+    <div id="content">
+        <table>
+            <thead>
+                <tr>
+                    <th>번호</th>
+                    <th>제목</th>
+                    <th>장르</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+        
+    <div class="footer">
+        <div class="footer-container">
+          <a class="" href="/">
+            <img src="" width="80">
+          </a>
+          <p class="">chatGPT로 웹 소설을 만들어보자</p>
+          <div class="copyright">
+            <p class="">Ormi 3rd</p>
+            <p class="">dwanGim : https://github.com/dwanGim/chappie</p>
+          </div>
+        </div>
+        <div>
+        <p class="text-white">COPYRIGHT CHAPPIE ALL RIGHT RESERVED</p>
+        </div>
+  
+      </div>
 </body>
 
 <script>
@@ -74,6 +97,10 @@
             window.location.href = `detail.html?index=${index}`;
         });
     });
+
+    function headerBtnOnClick(){
+        location.href='./index.html'
+    }
 
 </script>
 
