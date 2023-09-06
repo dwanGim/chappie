@@ -41,7 +41,7 @@
           <div class="field-container" id="fi">
             <div class="btn-box" id="btn-box">
               <button id="iDunnoBtn" class="onclickBtn" onclick="iDunno()">모르겠어요..</button>
-              <button class="onclickBtn" onclick="generateWebNovel()">웹소설 만들기!</button>
+              <button class="onclickBtn" id="generateBtn" onclick="generateWebNovel()">웹소설 만들기!</button>
             </div>
             <div class="manu-bar">
               <ul class="menu-tabs">
@@ -63,87 +63,56 @@
 
 
             <fieldset id="question1" class="textarea-field">    
-            <!-- <label for="title">제목:</label> -->
             <textarea type="text" id="title" class="textarea" placeholder="제목을 적어주세요."></textarea>
-            <!-- <button class="onclickBtn" onclick="next('2')">다음</button> -->
             </fieldset>
 
             <fieldset id="question2" class="textarea-field"  style="display: none">
-            <!-- <label for="genre">장르:</label> -->
-            <textarea type="text" id="genre" placeholder="장르를 적어주세요."></textarea>
-            <!-- <button class="onclickBtn" onclick="next('3')">다음</button>
-            <button class="onclickBtn" onclick="prev('1')">이전</button>   -->
+            <textarea type="text" id="genre" class="textarea" placeholder="장르를 적어주세요."></textarea>
             </fieldset>
 
             <fieldset id="question3" class="textarea-field"  style="display: none">
-            <!-- <label for="mc">주인공:</label> -->
-            <textarea type="text" id="mc" placeholder="캐릭터를 적어주세요."></textarea>
-            <!-- <button class="onclickBtn" onclick="next('4')">다음</button>
-            <button class="onclickBtn" onclick="prev('2')">이전</button> -->
+            <textarea type="text" id="mc" class="textarea" placeholder="캐릭터를 적어주세요."></textarea>
+  
             </fieldset>
 
-            <fieldset id="question4" class="textarea-field"  style="display: none">
-            <!-- <label for="sc">조력자:</label> -->
-            <textarea type="text" id="sc" placeholder="조력자를 적어주세요."></textarea>
-            <!-- <button class="onclickBtn" onclick="next('5')">다음</button>
-            <button class="onclickBtn" onclick="prev('3')">이전</button> -->
+            <fieldset id="question4" class="textarea" class="textarea-field"  style="display: none">
+            <textarea type="text" id="sc" class="textarea" placeholder="조력자를 적어주세요."></textarea>
             </fieldset>
 
             <fieldset id="question5" class="textarea-field"  style="display: none">
-            <!-- <label for="antagonist">빌런:</label> -->
-            <textarea type="text" id="antagonist" placeholder="빌런은 어떤 인물인가요?"></textarea></fieldset>
-            <!-- <button class="onclickBtn" onclick="next('6')">다음</button>
-            <button class="onclickBtn" onclick="prev('4')">이전</button> -->
+            <textarea type="text" id="antagonist" class="textarea" placeholder="빌런은 어떤 인물인가요?"></textarea></fieldset>
             </fieldset>
 
             <fieldset id="question6" class="textarea-field"  style="display: none">          
-            <!-- <label for="background">배경:</label> -->
-            <textarea type="text" id="background" placeholder="사건이 일어나는 배경은 어떤 배경인가요?"></textarea>
-            <!-- <button class="onclickBtn" onclick="next('7')">다음</button>
-            <button class="onclickBtn" onclick="prev('5')">이전</button> -->
+            <textarea type="text" id="background"  class="textarea" placeholder="사건이 일어나는 배경은 어떤 배경인가요?"></textarea>
             </fieldset>
 
             <fieldset id="question7" class="textarea-field"  style="display: none">         
-            <!-- <label for="event1">첫 사건:</label> -->
-            <textarea type="text" id="event1" placeholder="첫번째 사건이 있나요?"></textarea>
-            <!-- <button class="onclickBtn" onclick="next('8')">다음</button>
-            <button class="onclickBtn" onclick="prev('6')">이전</button> -->
+            <textarea type="text" id="event1" class="textarea" placeholder="첫번째 사건이 있나요?"></textarea>
             </fieldset>
 
 
             <fieldset id="question8" class="textarea-field"  style="display: none"> 
-            <!-- <label for="event2">사건2:</label> -->
-            <textarea type="text" id="event2" placeholder="그 다음에는 어떤 일이 일어나나요?"></textarea>
-            <!-- <button class="onclickBtn" onclick="next('9')">다음</button>
-            <button class="onclickBtn" onclick="prev('7')">이전</button> -->
+            <textarea type="text" id="event2" class="textarea" placeholder="그 다음에는 어떤 일이 일어나나요?"></textarea>
             </fieldset>
 
             <fieldset id="question9" class="textarea-field"  style="display: none">
-            <!-- <label for="event3">사건3:</label> -->
-            <textarea type="text" id="event3" placeholder="그 다음에는 또 어떤 일이 일어나나요?
+            <textarea type="text" id="event3" class="textarea" placeholder="그 다음에는 또 어떤 일이 일어나나요?
             "></textarea>
-            <!-- <button class="onclickBtn" onclick="next('10')">다음</button>
-            <button class="onclickBtn" onclick="prev('8')">이전</button> -->
             </fieldset>
 
             <fieldset id="question10" class="textarea-field"  style="display: none">  
-            <!-- <label for="ending">결말:</label> -->
-            <textarea type="text" id="ending" placeholder="결말은 어떻게 되나요?"></textarea>
-            <!-- <button class="onclickBtn" onclick="next('11')">다음</button>
-            <button class="onclickBtn" onclick="prev('9')">이전</button> -->
+            <textarea type="text" id="ending" class="textarea" placeholder="결말은 어떻게 되나요?"></textarea>
             </fieldset>
 
             <fieldset id="question11" class="textarea-field"  style="display: none">
-            <!-- <label for="moral">일러두기:</label>   -->
-            <textarea type="text" id="moral" placeholder="작품을 통해 전달하고 싶은 주제나 메세지가 있나요? 또는 저에게 당부하고 싶은 말이 있다면 해주세요."></textarea>
-
-            <!-- <button class="onclickBtn" onclick="prev('10')">이전</button> -->
+            <textarea type="text" id="moral" class="textarea" placeholder="작품을 통해 전달하고 싶은 주제나 메세지가 있나요? 또는 저에게 당부하고 싶은 말이 있다면 해주세요."></textarea>
             </fieldset>
 
 
             <fieldset id="question12" class="textarea-field" style="display: none" >
               <div>
-                <textarea type="text" id="outputArea" placeholder="아직 결과가 없습니다." readonly></textarea>
+                <textarea type="text" id="outputArea"  placeholder="아직 결과가 없습니다." readonly></textarea>
               </div>
               <div id="output" style="display: none">
                 <div class="loading" id="loading">
@@ -176,8 +145,9 @@
 
     </div>
 
-</body>
 <script src="./myPrj.js"></script>
+</body>
+
 
 
 </html>

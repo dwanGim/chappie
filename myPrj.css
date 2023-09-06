@@ -44,6 +44,7 @@ body {
 
 }
 
+/* 말풍선 꼬리표 부분입니다. */
 .bubble:before {
   content: "";
   width: 0px;
@@ -326,4 +327,23 @@ button:hover {
   background-color: #f3c2bd;
   border: none;
   color: #fff;
+  margin-left: 5em;
+  font-size: 2em;
+}
+
+#outputArea,
+.textarea {
+  overflow: scroll; /* 스크롤바를 보여줌 */
+  scrollbar-width: thin; /* Firefox에서 스크롤바 너비 조절 */
+  scrollbar-color: transparent transparent; /* 스크롤바 색상 설정 */
+}
+
+#outputArea::-webkit-scrollbar,
+.textarea::-webkit-scrollbar {
+  width: 6px;
+}
+
+#outputArea::-webkit-scrollbar-thumb,
+.textarea::-webkit-scrollbar-thumb {
+  background-color: transparent;
 }
