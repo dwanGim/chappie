@@ -21,7 +21,7 @@ let isReplying = false;
 // 초기화 함수들은 여기에!
 document.addEventListener('DOMContentLoaded', function () {
     // 문서가 로드될 때 실행할 코드
-    console.log("채피, 발진");
+    // console.log("채피, 발진");
     // console.log("TOTAL_PAGES"+TOTAL_PAGE);
     // console.log(tabBtns)
 
@@ -37,8 +37,8 @@ document.addEventListener('DOMContentLoaded', function () {
 });
 
 function moveToPage(pageNumber) {
-    console.log("pageNumber"+pageNumber);
-    console.log("CURRENT_PAGE"+CURRENT_PAGE);
+    // console.log("pageNumber"+pageNumber);
+    // console.log("CURRENT_PAGE"+CURRENT_PAGE);
     const currentField = document.getElementById(`question${CURRENT_PAGE}`);
     const targetField = document.getElementById(`question${pageNumber}`);
     const textareaId = textareaIdList[pageNumber];
@@ -109,7 +109,7 @@ tabBtns.forEach(btn => {
             // textarea에 대한 이벤트 리스너 등록
             textareaTxt.addEventListener('input', () => {
                 // textarea의 내용이 변경되었을 때 실행할 작업
-                console.log(`Textarea with ID ${textareaId} 내용이 변경되었습니다.`);
+                // console.log(`Textarea with ID ${textareaId} 내용이 변경되었습니다.`);
                 
                 if (textareaTxt.value.length > 0) {
                     idunnoBtn.textContent = '이걸로 합시다!';
@@ -132,7 +132,7 @@ tabBtns.forEach(btn => {
             });
             
             // 클릭된 버튼에 대한 동작을 여기에 작성합니다.
-            console.log(`${btn.textContent} 버튼이 클릭되었습니다.`);
+            // console.log(`${btn.textContent} 버튼이 클릭되었습니다.`);
             
         }else{
                 // 클릭된 버튼에 'clicked' 클래스를 추가합니다.
@@ -145,7 +145,7 @@ tabBtns.forEach(btn => {
                 });
                 
                 // 클릭된 버튼에 대한 동작을 여기에 작성합니다.
-                console.log(`${btn.textContent} 버튼이 클릭되었습니다.`);
+                // console.log(`${btn.textContent} 버튼이 클릭되었습니다.`);
                 displayOutPut();
         }
             
@@ -232,7 +232,7 @@ function generateWebNovel() {
         "content": output
     });
     $textarea.value = '';
-    console.log(output);
+    // console.log(output);
     chatGPTAPI();
 }
 
@@ -248,7 +248,7 @@ function chatGPTAPI() {
     outputArea.style.display = "none";
         
     
-    console.log("isComplete 값:", isComplete);
+    // console.log("isComplete 값:", isComplete);
 
     loadingBtnHandler(isComplete);
 
@@ -262,13 +262,13 @@ function chatGPTAPI() {
     })
     .then(res => res.json())
     .then(res => {
-        console.log(res);
+        // console.log(res);
         
         // 답변 온 것을 assistant로 저장
         const replying = res.choices[0].message.content;
         outputDiv.innerHTML = `<p class='typingTxt' style='white-space: pre-line;'>${replying}</p>`
         loading.style.display = "none";
-        console.log(replying);
+        // console.log(replying);
         // 지금은 문제가 많은 타이핑 함수
         // autoTyping(".typingTxt",200);
         
@@ -287,7 +287,7 @@ function loadingBtnHandler(isComplete){
 
         btnIds.forEach(btnId => {
             const btn = document.getElementById(btnId);
-            console.log(btn)
+            // console.log(btn)
             btn.disabled = true;
         });
 
