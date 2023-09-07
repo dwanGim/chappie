@@ -112,7 +112,7 @@ https://dwangim.github.io/chappie/ 로 채피에 접속하세요.
 
 <img src='./img/prac.png'>
 <br><br>
-이러한 차트를 바탕으로 목업 페이지를 만들어본 뒤 api요청을 테스트했습니다.
+이러한 차트를 바탕으로 목업 페이지를 만들어본 뒤 api요청과 온클릭 기능들을 테스트했습니다.
 
 
 <br><br>
