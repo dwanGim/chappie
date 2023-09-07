@@ -219,7 +219,7 @@ function generateWebNovel() {
 <br>
 
 
-사용자의 답변을 통해 웹소설을 요청할 데이터의 구조를 만들고 api 요청을 수행해주는 가장 중요한 함수입니다.
+사용자의 답변을 통해 웹소설을 요청할 데이터의 구조를 만들고 api 요청을 해주는 가장 중요한 함수입니다.
 <br>
 
 
@@ -308,6 +308,10 @@ https://bongo.cat/
 
 3. LOLcolor
 https://www.webdesignrankings.com/resources/lolcolors/
+
+
+4. loading 이미지
+https://loading.io/
 
 <br>
 

@@ -1,6 +1,8 @@
 ## 파일 무시
 /note.txt
 /apiKeys.js
+/header.html
+/footer.html
 
 ## 다음과 같은 확장자는 전체 무시
 *.text
