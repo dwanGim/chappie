@@ -9,6 +9,7 @@
   <style>
   </style>
     <link rel="stylesheet" href="./index.css">
+    <link rel="stylesheet" href="./history.css">
     <link rel='stylesheet' href='https://fonts.googleapis.com/css?family=Ropa+Sans'>
 </head>
 
@@ -17,25 +18,26 @@
         <button class="header-btn" id="header-btn" onclick="headerBtnOnClick()">CHAPPIE</button>
         <button class="header-btn" id="history-btn" onclick="goHistory()">HISTORY</button>
     </div>
-    <div id="content">
-        <table>
-            <thead>
-                <tr>
-                    <th>번호</th>
-                    <th>제목</th>
-                    <th>장르</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                </tr>
-            </tbody>
-        </table>
+    <div class="container">
+        <div id="content">
+            <table>
+                <thead>
+                    <tr>
+                        <th>번호</th>
+                        <th>제목</th>
+                        <th>장르</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
     </div>
-        
     <div class="footer">
         <div class="footer-container">
           <a class="" href="/">
@@ -62,8 +64,8 @@
 
     const tableBody = document.querySelector("table tbody");
 
-    // 각 데이터에 대해 처리
-    dataArray.forEach((data, index) => {
+    // 최신글을 상단으로 reverse
+    dataArray.reverse().forEach((data, index, array) => {
         const text = data.novelData;
         const result = {};
 
@@ -84,9 +86,9 @@
         const row = tableBody.insertRow();
         const numberCell = row.insertCell(0);
         const titleCell = row.insertCell(1);
-        const genreCell = row.insertCell(2); 
+        const genreCell = row.insertCell(2);
 
-        numberCell.textContent = index + 1;
+        numberCell.textContent = array.length - index;
         titleCell.textContent = result.제목;
         genreCell.textContent = result.장르;
 

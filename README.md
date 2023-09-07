@@ -301,7 +301,7 @@ function generateWebNovel() {
 
 1. ChatGPT 연동문서
 https://paullabworkspace.notion.site/ChatGPT-eb9761e8baae41ce9f7c405df8e19786
-<br>
+
 
 2. special thx to bongo.cat
 https://bongo.cat/

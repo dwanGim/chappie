@@ -15,10 +15,12 @@
         <button class="header-btn" id="header-btn" onclick="headerBtnOnClick()">CHAPPIE</button>
         <button class="header-btn" id="history-btn" onclick="goHistory()">HISTORY</button>
     </div>
-    <div id="content">
-        <!-- 게시물 내용이 여기에 표시됩니다. -->
+    <div class="container">
+        <div id="content">
+            <!-- 게시물 내용이 여기에 표시됩니다. -->
+        </div>
     </div>
-
+    
 
     <div class="footer">
         <div class="footer-container">
@@ -38,6 +40,7 @@
       </div>
 
 <script>
+    const outputStrList = ["[제목]","[장르]","[주인공]","[조력자]","[빌런]","[배경]","[첫 사건]","[두번째 사건]","[세번째 사건]","[엔딩]","[덧붙여서..]"];
     const urlParams = new URLSearchParams(window.location.search);
     const postId = urlParams.get('index');
     console.log(postId);
@@ -51,12 +54,35 @@
         const text = selectedData.novelData;
         console.log(text);
         
+
         contentDiv.innerHTML = text;
     } else {
         contentDiv.innerHTML = '게시물을 찾을 수 없습니다.';
     }
+
     function headerBtnOnClick(){
-        location.href='./index.html'
+        location.href='./index.html';
+    }
+
+    function goHistory(){
+        location.href='./history.html';
+    }
+
+    function outputToTextarea(output) {
+    
+        for (let index = 0; index < textareaIdList.length; index++) {
+            const textareaId = textareaIdList[index];
+            const startMarker = outputStrList[index];
+            const endMarker = outputStrList[index + 1];
+            const slicedText = sliceText(output, startMarker, endMarker);
+            document.getElementById(textareaId).value = slicedText;
+        }
+    }
+
+    function sliceText(inputText, startMarker, endMarker) {
+        const startIndex = inputText.indexOf(startMarker);
+        const endIndex = inputText.indexOf(endMarker);
+        return inputText.slice(startIndex, endIndex).trim();
     }
 
 </script>
