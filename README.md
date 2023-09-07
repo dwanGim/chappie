@@ -106,21 +106,21 @@ https://dwangim.github.io/chappie/ 로 채피에 접속하세요.
 
 <img src='./img/flowchart.png' width="700px" height="800px"></img>
 
-<br>
+<br><br>
 이 HTML페이지는 자바스크립트 함수의 온클릭 함수와 이벤트리스너 등으로 분기조건이 구성되어 있습니다.
-<br>
+<br><br>
 
 <img src='./img/prac.png'>
-<br>
+<br><br>
 이러한 차트를 바탕으로 목업 페이지를 만들어본 뒤 api요청을 테스트했습니다.
 
 
-<br>
+<br><br>
 완성된 페이지에서는 해당 경험을 바탕으로서 개발할 수 있었습니다.
 같은 버튼을 사용하더라도 출력한 결과물이 있는지, 답변한 내용이 있는지, 현재 페이지에서 보여주어야할 화면이 무엇인지에 대하여.
 사용자가 최대한 불편함을 느끼지 않도록 설계하였습니다.
 
-<br>
+<br><br>
 
 
 ```javascript
@@ -137,11 +137,11 @@ function goAheadCat(num) {
 }
 
 ```
-<br>
+<br><br>
 
 
 API 통신 후 받아온 플롯이 있을 때 고양이의 대사를 화면에 출력하는 예시입니다.
-<br>
+<br><br>
 
 
 ```javascript
