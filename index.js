@@ -100,8 +100,6 @@ function pageBtnHandler(pageNumber) {
             nonDisplayOutPut();
         }
     }
-
-    
 }
 
 tabBtns.forEach(btn => {
@@ -255,11 +253,9 @@ function chatGPTAPI() {
     const outputDiv = document.getElementById('output');
     let isComplete = false;
     
-
     outputDiv.style.display = "block";
     loading.style.display = "block";
     outputArea.style.display = "none";
-        
     
     // console.log("isComplete 값:", isComplete);
 
@@ -295,9 +291,6 @@ function chatGPTAPI() {
         // 로컬 스토리지에 업데이트된 데이터 저장
         localStorage.setItem("novelData", JSON.stringify(dataArray));
 
-
-
-        
         displayOutPut();
         outputToTextarea(replying);
         isComplete = true;
